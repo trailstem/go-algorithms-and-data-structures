@@ -101,14 +101,18 @@ func main() {
 
 	// 14. ゴルーチン
 	fmt.Println("\n### 14. ゴルーチン ###")
-	go sayHello()
-	time.Sleep(1 * time.Second)
-	fmt.Println("Finished")
+	// ゴルーチンで並行実行
+	go task1()
+	go task2()
+	// メイン関数が終了しないように待機
+	time.Sleep(2 * time.Second)
+	fmt.Println("Main Function Finished")
 
 	// 15. チャネル
 	fmt.Println("\n### 15. チャネル ###")
 	ch := make(chan int)
 	go func() {
+		time.Sleep(10000000000)
 		ch <- 42
 	}()
 	val := <-ch
@@ -136,9 +140,16 @@ func increment(x *int) {
 	*x = *x + 1
 }
 
-func sayHello() {
-	for i := 0; i < 5; i++ {
-		fmt.Println("Hello")
-		time.Sleep(100 * time.Millisecond)
+func task1() {
+	for i := 1; i <= 5; i++ {
+		fmt.Println("Task 1 - Step", i)
+		time.Sleep(200 * time.Millisecond) // 200ms待機
+	}
+}
+
+func task2() {
+	for i := 1; i <= 5; i++ {
+		fmt.Println("Task 2 - Step", i)
+		time.Sleep(300 * time.Millisecond) // 300ms待機
 	}
 }
