@@ -7,17 +7,15 @@ import (
 func insertionSort(A []int, N int) {
 	for i := 1; i < N; i++ {
 		v := A[i]      
-		j := i - 1     // 1つ左の要素から開始
+		j := i - 1   
 
 		for j >= 0 && A[j] > v {
 			A[j+1] = A[j]
 			j--
 		}
 
-		// 適切な位置にvを挿入
 		A[j+1] = v
 
-		// 配列の状態を出力
 		printArray(A)
 	}
 }
